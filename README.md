@@ -9,7 +9,7 @@ Using the Extensions -> Game Speak -> Settings menu you can choose which texts t
 ## Unlock extra voice
 It's possible to unlock an extra voice see here https://windowsreport.com/unlock-new-text-to-speech-voice-windows-10/
 
-## choise text to speech voice in control panel
+## choose text to speech voice in control panel
 [![Change TTS voice in control panel](http://img.youtube.com/vi/sTR_paVlT0o/0.jpg)](http://www.youtube.com/watch?v=sTR_paVlT0o "Change TTS voice in control panel")
 
 ## Example video
