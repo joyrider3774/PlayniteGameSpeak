@@ -87,7 +87,7 @@ $CmbGameUninstalled.location     = New-Object System.Drawing.Point(160,95)
 $CmbGameUninstalled.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDownList
 
 $ButSave                         = New-Object system.Windows.Forms.Button
-$ButSave.text                    = "Save"
+$ButSave.text                    = "Ok"
 $ButSave.width                   = 80
 $ButSave.height                  = 30
 $ButSave.location                = New-Object System.Drawing.Point(155,157)
@@ -169,11 +169,8 @@ function global:SaveSettings()
 
 function global:SettingsMenu()
 {
-	$result = $FrmSettings.ShowDialog()
-	if ($result –eq [System.Windows.Forms.DialogResult]::Ok)
-	{
-		SaveSettings
-	}
+	$FrmSettings.ShowDialog()
+	SaveSettings
 }
 
 function global:OnApplicationStarted()
