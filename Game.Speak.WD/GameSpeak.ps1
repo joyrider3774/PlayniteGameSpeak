@@ -1,103 +1,105 @@
 Add-Type -AssemblyName System.speech
+Add-Type -AssemblyName PresentationCore, PresentationFramework
+
 $global:Speak = New-Object System.Speech.Synthesis.SpeechSynthesizer
 $global:FirstSpeak = $True
+$global:GameSelected = 3
+$global:GameLaunching = 3
+$global:GameInstalled = 3
+$global:GameUninstalled = 3
 
-# -------------------- settings form -------------------------
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
-[System.Windows.Forms.Application]::EnableVisualStyles()
+function ShowSettingsWindow() {
 
-$FrmSettings                     = New-Object system.Windows.Forms.Form
-$FrmSettings.ClientSize          = New-Object System.Drawing.Point(390,198)
-$FrmSettings.text                = "Playnite Game Speak Settings"
-$FrmSettings.TopMost             = $false
-$FrmSettings.StartPosition       = [System.Windows.Forms.FormStartPosition]::CenterParent;
-$FrmSettings.FormBorderStyle     = [System.Windows.Forms.FormBorderStyle]::FixedDialog
-$FrmSettings.MinimizeBox         = $false
-$FrmSettings.MaximizeBox         = $false
+$Xaml = @"
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Speak What / Where" Margin="112,12,0,0" Name="lblWhatWhere" FontWeight="Bold"/>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Margin="160,46,0,0" Name="CmbGameSelection" IsDropDownOpen="False" IsTabStop="True" Height="22" AllowDrop="True">
+<ComboBoxItem Content="Never"/>
+<ComboBoxItem Content="Desktop"/>
+<ComboBoxItem Content="Fullscreen"/>
+<ComboBoxItem Content="Desktop + Fullscreen"/>
+</ComboBox>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Margin="160,86,0,0" Name="CmbGameLaunching" IsDropDownOpen="False" IsTabStop="True" Height="22" AllowDrop="True">
+<ComboBoxItem Content="Never"/>
+<ComboBoxItem Content="Desktop"/>
+<ComboBoxItem Content="Fullscreen"/>
+<ComboBoxItem Content="Desktop + Fullscreen"/>
+</ComboBox>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Margin="160,126,0,0" Name="CmbGameInstalled" IsDropDownOpen="False" IsTabStop="True" Height="22" AllowDrop="True">
+<ComboBoxItem Content="Never"/>
+<ComboBoxItem Content="Desktop"/>
+<ComboBoxItem Content="Fullscreen"/>
+<ComboBoxItem Content="Desktop + Fullscreen"/>
+</ComboBox>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Margin="160,166,0,0" Name="CmbGameUninstalled" IsDropDownOpen="False" IsTabStop="True" Height="22" AllowDrop="True">
+<ComboBoxItem Content="Never"/>
+<ComboBoxItem Content="Desktop"/>
+<ComboBoxItem Content="Fullscreen"/>
+<ComboBoxItem Content="Desktop + Fullscreen"/>
+</ComboBox>
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Game Selection:" Margin="15,46,0,0" Name="LblGameSelection"/>
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Game Launching:" Margin="15,86,0,0" Name="LblGameLaunching"/>
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Game Installed:" Margin="15,126,0,0" Name="LblGameInstalled"/>
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Game Uninstalled:" Margin="15,166,0,0" Name="LblCmbGameUninstalled"/>
+<Button Content="Ok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="143,216,0,0" Name="ButOk" IsDefault="True"/>
+</Grid>
+"@
 
-$Groupbox1                       = New-Object system.Windows.Forms.Groupbox
-$Groupbox1.height                = 132
-$Groupbox1.width                 = 366
-$Groupbox1.text                  = "Speak what / where"
-$Groupbox1.location              = New-Object System.Drawing.Point(9,13)
+	#parse the xaml for controls
+	$Controls = [Windows.Markup.XamlReader]::Parse($Xaml)
 
-$lblGameName                     = New-Object system.Windows.Forms.Label
-$lblGameName.text                = "Game selection:"
-$lblGameName.AutoSize            = $true
-$lblGameName.width               = 25
-$lblGameName.height              = 10
-$lblGameName.location            = New-Object System.Drawing.Point(20,25)
-#$lblGameName.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+	#make variables for each control in powershell
+	[xml]$xml = $Xaml
+	$xml.FirstChild.SelectNodes("//*[@Name]") | ForEach-Object {Set-Variable -Name $_.Name -Value $Controls.FindName($_.Name) }
 
-$LblGameLaunching                = New-Object system.Windows.Forms.Label
-$LblGameLaunching.text           = "Game launching:"
-$LblGameLaunching.AutoSize       = $true
-$LblGameLaunching.width          = 25
-$LblGameLaunching.height         = 10
-$LblGameLaunching.location       = New-Object System.Drawing.Point(20,50)
-#$LblGameLaunching.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+	#window options
+	$CreationOptions = New-Object Playnite.SDK.WindowCreationOptions
+	$CreationOptions.ShowMaximizeButton = $False
+	$CreationOptions.ShowMinimizeButton = $False
 
-$LblGameInstalled                = New-Object system.Windows.Forms.Label
-$LblGameInstalled.text           = "Game installed:"
-$LblGameInstalled.AutoSize       = $true
-$LblGameInstalled.width          = 25
-$LblGameInstalled.height         = 10
-$LblGameInstalled.location       = New-Object System.Drawing.Point(20,75)
-#$LblGameInstalled.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+	#create window needs to be global as i needed to access it from butokclick
+	$global:Window = $PlayniteApi.Dialogs.CreateWindow($CreationOptions)
+	$global:Window.Content = $Controls
+	$global:Window.Width = 380;
+	$global:Window.Height = 280;
+	$global:Window.Title = "Game Speak Settings"
 
-$LblGameUinstalled               = New-Object system.Windows.Forms.Label
-$LblGameUinstalled.text          = "Game uninstalled:"
-$LblGameUinstalled.AutoSize      = $true
-$LblGameUinstalled.width         = 25
-$LblGameUinstalled.height        = 10
-$LblGameUinstalled.location      = New-Object System.Drawing.Point(20,100)
-#$LblGameUinstalled.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+	#set the owner so we can center it using startup location
+	$global:Window.Owner = $PlayniteApi.Dialogs.GetCurrentAppWindow()
+	$global:Window.WindowStartupLocation = [System.Windows.WindowStartupLocation]::CenterOwner
+	$global:Window.ResizeMode = [System.Windows.ResizeMode]::NoResize
 
-$CmbGameSelection                = New-Object system.Windows.Forms.ComboBox
-$CmbGameSelection.width          = 190
-$CmbGameSelection.height         = 20
-@('Never','Desktop','Fullscreen','Desktop + Fullscreen') | ForEach-Object {[void] $CmbGameSelection.Items.Add($_)}
-$CmbGameSelection.location       = New-Object System.Drawing.Point(160,20)
-#$CmbGameSelection.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-$CmbGameSelection.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+	#handler for pressing ok 
+	$ButOk.Add_Click({CmbOkClicked $this $_})
 
-$CmbGameLaunching                = New-Object system.Windows.Forms.ComboBox
-$CmbGameLaunching.width          = 190
-$CmbGameLaunching.height         = 20
-@('Never','Desktop','Fullscreen','Desktop + Fullscreen') | ForEach-Object {[void] $CmbGameLaunching.Items.Add($_)}
-$CmbGameLaunching.location       = New-Object System.Drawing.Point(160,45)
-#$CmbGameLaunching.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-$CmbGameLaunching.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+	#set current values to combobox
+	$CmbGameSelection.SelectedIndex = $global:GameSelected
+	$CmbGameLaunching.SelectedIndex = $global:GameLaunching
+	$CmbGameInstalled.SelectedIndex = $global:GameInstalled
+	$CmbGameUninstalled.SelectedIndex = $global:GameUninstalled
 
-$CmbGameInstalled                = New-Object system.Windows.Forms.ComboBox
-$CmbGameInstalled.width          = 190
-$CmbGameInstalled.height         = 20
-@('Never','Desktop','Fullscreen','Desktop + Fullscreen') | ForEach-Object {[void] $CmbGameInstalled.Items.Add($_)}
-$CmbGameInstalled.location       = New-Object System.Drawing.Point(160,70)
-#$CmbGameInstalled.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-$CmbGameInstalled.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+	#show the dialog
+	$global:Window.ShowDialog()
 
-$CmbGameUninstalled              = New-Object system.Windows.Forms.ComboBox
-$CmbGameUninstalled.width        = 190
-$CmbGameUninstalled.height       = 20
-@('Never','Desktop','Fullscreen','Desktop + Fullscreen') | ForEach-Object {[void] $CmbGameUninstalled.Items.Add($_)}
-$CmbGameUninstalled.location     = New-Object System.Drawing.Point(160,95)
-#$CmbGameUninstalled.Font         = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-$CmbGameUninstalled.DropDownStyle  = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+	#get the variables from the controls
+	$global:GameSelected = $CmbGameSelection.SelectedIndex 
+	$global:GameLaunching = $CmbGameLaunching.SelectedIndex
+	$global:GameInstalled = $CmbGameInstalled.SelectedIndex
+	$global:GameUninstalled = $CmbGameUninstalled.SelectedIndex
 
-$ButSave                         = New-Object system.Windows.Forms.Button
-$ButSave.text                    = "Ok"
-$ButSave.width                   = 80
-$ButSave.height                  = 30
-$ButSave.location                = New-Object System.Drawing.Point(155,157)
-#$ButSave.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-$ButSave.DialogResult            = [System.Windows.Forms.DialogResult]::Ok
+	#immediatly save settings just in case playnite might ever crash
+	SaveSettings
+}
 
-$FrmSettings.controls.AddRange(@($Groupbox1,$ButSave))
-$Groupbox1.controls.AddRange(@($lblGameName,$LblGameLaunching,$LblGameInstalled,$LblGameUinstalled,$CmbGameSelection,$CmbGameLaunching,$CmbGameInstalled,$CmbGameUninstalled))
+function CmbOkClicked() {
+	param (
+		$Sender,
+		$RoutedEventArgs
+	)
 
-# -------------------- end settings form -------------------------
+	#close it when pressing ok
+	$global:Window.DialogResult = $True;
+}
 
 #there seems to be a bug upon application launch where
 #gameselected can happen before applicationstarted
@@ -148,10 +150,10 @@ function global:LoadSettings()
 		$Content = Get-Content -Path $SettingsFile
 		if ($Content.Count -eq 4)
 		{
-			$CmbGameSelection.SelectedIndex = [int]$Content[0]
-			$CmbGameInstalled.SelectedIndex = [int]$Content[1]
-			$CmbGameUninstalled.SelectedIndex = [int]$Content[2]
-			$CmbGameLaunching.SelectedIndex = [int]$Content[3]
+			$global:GameSelected = [int]$Content[0]
+			$global:GameInstalled = [int]$Content[1]
+			$global:GameUninstalled = [int]$Content[2]
+			$global:GameLaunching = [int]$Content[3]
 		}
 	}
 }
@@ -161,16 +163,15 @@ function global:SaveSettings()
 	#just in case user deleted it
 	New-Item -ItemType Directory -Path $CurrentExtensionDataPath -Force
 	$SettingsFile = Join-Path -Path $CurrentExtensionDataPath -ChildPath "Settings.dat"
-	Set-Content -Path $SettingsFile -Value ([string]$CmbGameSelection.SelectedIndex + "`r`n" +
-		[string]$CmbGameInstalled.SelectedIndex + "`r`n" +
-		[string]$CmbGameUninstalled.SelectedIndex + "`r`n" +
-		[string]$CmbGameLaunching.SelectedIndex)
+	Set-Content -Path $SettingsFile -Value ([string]$global:GameSelected + "`r`n" +
+		[string]$global:GameInstalled + "`r`n" +
+		[string]$global:GameUninstalled + "`r`n" +
+		[string]$global:GameLaunching)
 }
 
 function global:SettingsMenu()
 {
-	$FrmSettings.ShowDialog()
-	SaveSettings
+	ShowSettingsWindow
 }
 
 function global:OnApplicationStarted()
@@ -193,7 +194,7 @@ function global:OnGameStarting()
 	)
 
 	CheckFirstRun
-	DoSpeak ("Launching " + $game.Name) $CmbGameLaunching.SelectedIndex
+	DoSpeak ("Launching " + $game.Name) $global:GameLaunching
 }
 
 function global:OnGameStarted()
@@ -218,7 +219,7 @@ function global:OnGameInstalled()
 	)
 
 	CheckFirstRun
-	DoSpeak ("Installed " + $game.Name) $CmbGameInstalled.SelectedIndex
+	DoSpeak ("Installed " + $game.Name) $global:GameInstalled
 }
 
 function global:OnGameUninstalled()
@@ -228,7 +229,7 @@ function global:OnGameUninstalled()
 	)
 
 	CheckFirstRun
-	DoSpeak ("Uninstalled " + $game.Name) $CmbGameUninstalled.SelectedIndex
+	DoSpeak ("Uninstalled " + $game.Name) $global:GameUninstalled
 }
 
 function global:OnGameSelected()
@@ -240,7 +241,7 @@ function global:OnGameSelected()
 	CheckFirstRun
 	if ($arguments.NewValue.Count -eq 1) {
 		$arguments.NewValue | ForEach-Object {
-			DoSpeak $_.Name $CmbGameSelection.SelectedIndex
+			DoSpeak $_.Name $global:GameSelected
 		}
 	}
 }
