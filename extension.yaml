@@ -1,9 +1,10 @@
-﻿Id: Game.Speak.WD
+﻿Id: GameSpeak_9287cd5b-1397-4f57-9c76-9729ebca9b80
 Name: Game Speak
 Author: Joyrider3774
-Version: 1.1
-Module: GameSpeak.ps1
-Type: Script
+Version: 2.0
+Module: GameSpeak.dll
+Type: GenericPlugin
+Icon: icon.png
 Links:
     - Name: Github
       Url: https://github.com/joyrider3774/PlayniteGameSpeak

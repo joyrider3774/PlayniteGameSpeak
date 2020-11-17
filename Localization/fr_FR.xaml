@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+    <sys:String x:Key="LOCGameSelection">Sélection de jeu:</sys:String>
+    <sys:String x:Key="LOCGameLaunching">Lancement du jeu:</sys:String>
+    <sys:String x:Key="LOCGameInstalled">Partie installée :</sys:String>
+    <sys:String x:Key="LOCGameUnInstalled">Jeu désinstallé :</sys:String>
+    <sys:String x:Key="LOCLibraryUpdated">Librairie mise à jour :</sys:String>
+    <sys:String x:Key="LOCApplicationStarted">Application démarrée :</sys:String>
+    <sys:String x:Key="LOCApplicationStopped">Application arrêtée :</sys:String>
+    <sys:String x:Key="LOCSpeakWhatWhere">Dire quoi / Où</sys:String>
+
+    <sys:String x:Key="LOCCmbItemNever">Jamais</sys:String>
+    <sys:String x:Key="LOCCmbItemDesktop">Bureau</sys:String>
+    <sys:String x:Key="LOCCmbItemFullscreen">Plein écran</sys:String>
+    <sys:String x:Key="LOCCmbItemDesktopFullscreen">Bureau + Plein écran</sys:String>
+
+</ResourceDictionary>
