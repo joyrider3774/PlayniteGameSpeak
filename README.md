@@ -2,8 +2,8 @@
 A Text to speech plugin for playnite, it can "speak out" the game names, game launching, game installed and game uninstalled, ... texts using speech api.
 
 ## Settings
-Using the Extensions -> Game Speak -> Settings menu you can choose which texts to speak out and where (fullscreen, desktop, both or never).
-You can also specify what should be said. There is a special variable`[game]` you can put in certain events that support it, where it will be replaced by the related game's name.
+Using the Settings -> Plugins -> Game Speak screen you can choose which texts to speak out and where (fullscreen, desktop, both or never).
+You can also specify what should be said. There is a special variable `[game]` you can put in certain events that support it, where it will be replaced by the related game's name.
 
 [![Settings](settings.png)]
 
@@ -18,4 +18,4 @@ It's possible to unlock an extra voice see here https://windowsreport.com/unlock
 
 ## Credits
 * Used Icon made by [Freepik](http://www.freepik.com/)
-* Original Localiztation file loader by [Lacro59](https://github.com/Lacro59)
+* Original Localization file loader by [Lacro59](https://github.com/Lacro59)
