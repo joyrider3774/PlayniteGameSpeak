@@ -39,34 +39,19 @@ namespace GameSpeak
 
         public void DoSpeak(string aValue, int aSpeakOption, bool aAsync)
         {
-            void ActSpeak(System.Speech.Synthesis.SpeechSynthesizer aSpeak, string Value, bool Async)
-            {                    
-                aSpeak.SpeakAsyncCancelAll();
-                if (Async)
-                {
-                    aSpeak.SpeakAsync(Value);
-                }
-                else
-                {
-                    aSpeak.Speak(Value);
-                }
-
-            };
-            
             bool DesktopMode = PlayniteApi.ApplicationInfo.Mode == ApplicationMode.Desktop;
             bool DoPlay = ((DesktopMode && ((aSpeakOption == 1) || (aSpeakOption == 3))) ||
                 (!DesktopMode && ((aSpeakOption == 2) || (aSpeakOption == 3))));
             if (DoPlay && (aValue.Length > 0))
             {
-                //seems to be faster on scrolling with task but for non async can't use task
-                //needs to be blocked then
+                Speak.SpeakAsyncCancelAll();
                 if (aAsync)
                 {
-                    Task.Run(() => ActSpeak(Speak, aValue, aAsync));
+                    Speak.SpeakAsync(aValue);
                 }
                 else
                 {
-                    ActSpeak(Speak, aValue, aAsync);
+                    Speak.Speak(aValue);
                 }
             }
         }
