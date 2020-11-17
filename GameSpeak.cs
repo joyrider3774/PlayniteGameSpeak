@@ -2,12 +2,7 @@
 using Playnite.SDK.Models;
 using Playnite.SDK.Plugins;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Speech;
 using Playnite.SDK.Events;
 using System.IO;
 using System.Reflection;
@@ -17,8 +12,8 @@ namespace GameSpeak
     public class GameSpeak : Plugin
     {
         private static readonly ILogger logger = LogManager.GetLogger();
-       
-        private static readonly System.Speech.Synthesis.SpeechSynthesizer Speak = new System.Speech.Synthesis.SpeechSynthesizer();
+
+        private readonly System.Speech.Synthesis.SpeechSynthesizer Speak;
         
         public GameSpeakSettingsView SettingsView;
 
@@ -30,29 +25,47 @@ namespace GameSpeak
         
         public GameSpeak(IPlayniteAPI api) : base(api)
         {
-            Settings = new GameSpeakSettings(this);
-            
-            pluginFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            
-            Localization.SetPluginLanguage(pluginFolder, api.ApplicationSettings.Language);
+            try
+            {
+                Settings = new GameSpeakSettings(this);
+
+                Speak = new System.Speech.Synthesis.SpeechSynthesizer();
+
+                pluginFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+                Localization.SetPluginLanguage(pluginFolder, api.ApplicationSettings.Language);
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "GameSpeak()");
+                PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
+            }
         }
 
         public void DoSpeak(string aValue, int aSpeakOption, bool aAsync)
         {
-            bool DesktopMode = PlayniteApi.ApplicationInfo.Mode == ApplicationMode.Desktop;
-            bool DoPlay = ((DesktopMode && ((aSpeakOption == 1) || (aSpeakOption == 3))) ||
-                (!DesktopMode && ((aSpeakOption == 2) || (aSpeakOption == 3))));
-            if (DoPlay && (aValue.Length > 0))
+            try
             {
-                Speak.SpeakAsyncCancelAll();
-                if (aAsync)
+                bool DesktopMode = PlayniteApi.ApplicationInfo.Mode == ApplicationMode.Desktop;
+                bool DoPlay = ((DesktopMode && ((aSpeakOption == 1) || (aSpeakOption == 3))) ||
+                    (!DesktopMode && ((aSpeakOption == 2) || (aSpeakOption == 3))));
+                if (DoPlay && (aValue.Length > 0))
                 {
-                    Speak.SpeakAsync(aValue);
+                    Speak.SpeakAsyncCancelAll();
+                    if (aAsync)
+                    {
+                        Speak.SpeakAsync(aValue);
+                    }
+                    else
+                    {
+                        Speak.Speak(aValue);
+                    }
                 }
-                else
-                {
-                    Speak.Speak(aValue);
-                }
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "DoSpeak");
+                PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
             }
         }
 
@@ -101,10 +114,18 @@ namespace GameSpeak
         public override void OnApplicationStopped()
         {
             // Add code to be executed when Playnite is shutting down.
-            //needs to be sync or won't speak out full text before quiting
+            //needs to be sync or won't speak out full text before quiting            
             DoSpeak(Settings.SpeakApplicationStoppedText, Settings.SpeakApplicationStopped, false);
-            Speak.SpeakAsyncCancelAll();
-            Speak.Dispose();
+            try
+            {
+                Speak.SpeakAsyncCancelAll();
+                Speak.Dispose();
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "OnApplicationStopped");
+                PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
+            }
         }
 
         public override void OnLibraryUpdated()

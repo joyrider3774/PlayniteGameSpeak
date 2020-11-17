@@ -1,15 +1,12 @@
-﻿using Newtonsoft.Json;
-using Playnite.SDK;
+﻿using Playnite.SDK;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameSpeak
 {
     public class GameSpeakSettings : ISettings
     {
+        private static readonly ILogger logger = LogManager.GetLogger();
         private readonly GameSpeak plugin;
         private GameSpeakSettings EditDataSettings;
 
@@ -37,23 +34,39 @@ namespace GameSpeak
 
         public GameSpeakSettings(GameSpeak plugin)
         {
-            // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
-            this.plugin = plugin;
+            try
+            {                
+                // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
+                this.plugin = plugin;
 
-            // Load saved settings.
-            var savedSettings = plugin.LoadPluginSettings<GameSpeakSettings>();
+                // Load saved settings.
+                var savedSettings = plugin.LoadPluginSettings<GameSpeakSettings>();
 
-            // LoadPluginSettings returns null if not saved data is available.
-            if (savedSettings != null)
+                // LoadPluginSettings returns null if not saved data is available.
+                if (savedSettings != null)
+                {
+                    RestoreSettings(savedSettings);
+                }
+            }
+            catch (Exception E)
             {
-                RestoreSettings(savedSettings);
+                logger.Error(E, "GameSpeakSettings()");
+                plugin.PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
             }
         }
 
         public void BeginEdit()
         {
             // Code executed when settings view is opened and user starts editing values.
-            EditDataSettings = new GameSpeakSettings(plugin);
+            try
+            {               
+                EditDataSettings = new GameSpeakSettings(plugin);
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "BeginEdit()");
+                plugin.PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
+            }
         }
 
         public void CancelEdit()
@@ -66,8 +79,15 @@ namespace GameSpeak
         public void EndEdit()
         {
             // Code executed when user decides to confirm changes made since BeginEdit was called.
-            // This method should save settings made to Option1 and Option2.
-            plugin.SavePluginSettings(this);
+            try
+            {
+                plugin.SavePluginSettings(this);
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "EndEdit()");
+                plugin.PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
+            }
         }
 
         public bool VerifySettings(out List<string> errors)
@@ -82,22 +102,30 @@ namespace GameSpeak
 
         private void RestoreSettings(GameSpeakSettings source)
         {
-            SpeakGameInstalled = source.SpeakGameInstalled;
-            SpeakGameLaunching = source.SpeakGameLaunching;
-            SpeakGameSelected = source.SpeakGameSelected;
-            SpeakGameUnInstalled = source.SpeakGameUnInstalled;
-            SpeakApplicationStopped = source.SpeakApplicationStopped;
-            SpeakApplicationStarted = source.SpeakApplicationStarted;
-            SpeakLibraryUpdated = source.SpeakLibraryUpdated;
+            try
+            {
+                SpeakGameInstalled = source.SpeakGameInstalled;
+                SpeakGameLaunching = source.SpeakGameLaunching;
+                SpeakGameSelected = source.SpeakGameSelected;
+                SpeakGameUnInstalled = source.SpeakGameUnInstalled;
+                SpeakApplicationStopped = source.SpeakApplicationStopped;
+                SpeakApplicationStarted = source.SpeakApplicationStarted;
+                SpeakLibraryUpdated = source.SpeakLibraryUpdated;
 
 
-            SpeakGameSelectedText = source.SpeakGameSelectedText;
-            SpeakGameLaunchingText = source.SpeakGameLaunchingText;
-            SpeakGameInstalledText = source.SpeakGameInstalledText;
-            SpeakGameUnInstalledText = source.SpeakGameUnInstalledText;
-            SpeakApplicationStoppedText = source.SpeakApplicationStoppedText;
-            SpeakApplicationStartedText = source.SpeakApplicationStartedText;
-            SpeakLibraryUpdatedText = source.SpeakLibraryUpdatedText;
-    }
+                SpeakGameSelectedText = source.SpeakGameSelectedText;
+                SpeakGameLaunchingText = source.SpeakGameLaunchingText;
+                SpeakGameInstalledText = source.SpeakGameInstalledText;
+                SpeakGameUnInstalledText = source.SpeakGameUnInstalledText;
+                SpeakApplicationStoppedText = source.SpeakApplicationStoppedText;
+                SpeakApplicationStartedText = source.SpeakApplicationStartedText;
+                SpeakLibraryUpdatedText = source.SpeakLibraryUpdatedText;
+            }
+            catch (Exception E)
+            {
+                logger.Error(E, "RestoreSettings()");
+                plugin.PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
+            }
+        }
     }
 }

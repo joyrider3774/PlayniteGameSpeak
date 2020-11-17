@@ -12,7 +12,7 @@ namespace GameSpeak
     //
     public class Localization
     {
-        private static ILogger logger = LogManager.GetLogger();
+        private static readonly ILogger logger = LogManager.GetLogger();
 
         public static void SetPluginLanguage(string pluginFolder, string language, bool DefaultLoad = false)
         {
