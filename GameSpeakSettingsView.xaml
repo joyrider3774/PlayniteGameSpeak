@@ -9,7 +9,7 @@
     <StackPanel>
         <GroupBox Name="grpWhatWhere">
             <GroupBox.Header>
-                <Label FontWeight="Bold" Content="{DynamicResource LOCSpeakWhatWhere}"></Label>
+                <Label FontWeight="Bold" Content="{DynamicResource LOC_GAMESPEAK_SpeakWhatWhere}"></Label>
             </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -18,57 +18,57 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCGameSelection}" Name="LblGameSelection" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCGameLaunching}" Name="LblGameLaunching" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCGameInstalled}" Name="LblGameInstalled" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCGameUnInstalled}" Name="LblGameUninstalled" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCLibraryUpdated}" x:Name="LblLibraryUpdated" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCApplicationStarted}" x:Name="LblApplicationStarted" />
-                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOCApplicationStopped}" x:Name="LblApplicationStopped" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_GameSelection}" Name="LblGameSelection" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_GameLaunching}" Name="LblGameLaunching" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_GameInstalled}" Name="LblGameInstalled" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_GameUnInstalled}" Name="LblGameUninstalled" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_LibraryUpdated}" x:Name="LblLibraryUpdated" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_ApplicationStarted}" x:Name="LblApplicationStarted" />
+                    <Label HorizontalAlignment="Left" Height="25" Margin="2" VerticalAlignment="Top" Content="{DynamicResource LOC_GAMESPEAK_ApplicationStopped}" x:Name="LblApplicationStopped" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
                     <ComboBox HorizontalAlignment="Left"  Height="25"  SelectedIndex="{Binding SpeakGameSelected}" VerticalAlignment="Top" Width="177" Name="CmbGameSelection" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakGameLaunching}" VerticalAlignment="Top" Width="177"  Name="CmbGameLaunching" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakGameInstalled}" VerticalAlignment="Top" Width="177" Name="CmbGameInstalled" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakGameUnInstalled}" VerticalAlignment="Top" Width="177" Name="CmbGameUninstalled" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakLibraryUpdated}" VerticalAlignment="Top" Width="177"  x:Name="CmbLibraryUpdated" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakApplicationStarted}" VerticalAlignment="Top" Width="177"  x:Name="CmbApplicationStarted" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                     <ComboBox HorizontalAlignment="Left"  Height="25" SelectedIndex="{Binding SpeakApplicationStopped}" VerticalAlignment="Top" Width="177" x:Name="CmbApplicationStopped" IsDropDownOpen="False" IsTabStop="True" AllowDrop="True" Margin="2">
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemNever}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktop}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemFullscreen}"/>
-                        <ComboBoxItem Content="{DynamicResource LOCCmbItemDesktopFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemNever}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktop}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemFullscreen}"/>
+                        <ComboBoxItem Content="{DynamicResource LOC_GAMESPEAK_CmbItemDesktopFullscreen}"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Column="2">

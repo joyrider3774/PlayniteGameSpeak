@@ -2,18 +2,18 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 
-    <sys:String x:Key="LOCGameSelection">Mängu Valimine:</sys:String>
-    <sys:String x:Key="LOCGameLaunching">Mängu Käivitamine:</sys:String>
-    <sys:String x:Key="LOCGameInstalled">Mäng Installeeritud:</sys:String>
-    <sys:String x:Key="LOCGameUnInstalled">Mäng Deinstalleeritud:</sys:String>
-    <sys:String x:Key="LOCLibraryUpdated">Andmebaas Uuendatud:</sys:String>
-    <sys:String x:Key="LOCApplicationStarted">Rakendus Käivitatud:</sys:String>
-    <sys:String x:Key="LOCApplicationStopped">Rakendus Peatatud:</sys:String>
-    <sys:String x:Key="LOCSpeakWhatWhere">Räägi Mida / Kus</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameSelection">Mängu Valimine:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameLaunching">Mängu Käivitamine:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameInstalled">Mäng Installeeritud:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameUnInstalled">Mäng Deinstalleeritud:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_LibraryUpdated">Andmebaas Uuendatud:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_ApplicationStarted">Rakendus Käivitatud:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_ApplicationStopped">Rakendus Peatatud:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_SpeakWhatWhere">Räägi Mida / Kus</sys:String>
 
-    <sys:String x:Key="LOCCmbItemNever">Mitte kunagi</sys:String>
-    <sys:String x:Key="LOCCmbItemDesktop">Töölaud</sys:String>
-    <sys:String x:Key="LOCCmbItemFullscreen">Täisekraan</sys:String>
-    <sys:String x:Key="LOCCmbItemDesktopFullscreen">Töölaud + Täisekraan</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemNever">Mitte kunagi</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemDesktop">Töölaud</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemFullscreen">Täisekraan</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemDesktopFullscreen">Töölaud + Täisekraan</sys:String>
 
 </ResourceDictionary>

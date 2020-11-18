@@ -21,7 +21,7 @@ namespace GameSpeak
             {
                 SetPluginLanguage(pluginFolder, "LocSource", true);
             }
-            
+
             var dictionaries = Application.Current.Resources.MergedDictionaries;
             var langFile = Path.Combine(pluginFolder, "Localization\\" + language + ".xaml");
 
