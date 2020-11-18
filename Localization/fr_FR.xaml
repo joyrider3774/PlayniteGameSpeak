@@ -4,12 +4,12 @@
 
     <sys:String x:Key="LOCGameSelection">Sélection de jeu:</sys:String>
     <sys:String x:Key="LOCGameLaunching">Lancement du jeu:</sys:String>
-    <sys:String x:Key="LOCGameInstalled">Partie installée :</sys:String>
-    <sys:String x:Key="LOCGameUnInstalled">Jeu désinstallé :</sys:String>
+    <sys:String x:Key="LOCGameInstalled">Jeu installée :</sys:String>
+    <sys:String x:Key="LOCGameUnInstalled">Jeu désinstallé:</sys:String>
     <sys:String x:Key="LOCLibraryUpdated">Librairie mise à jour :</sys:String>
     <sys:String x:Key="LOCApplicationStarted">Application démarrée :</sys:String>
     <sys:String x:Key="LOCApplicationStopped">Application arrêtée :</sys:String>
-    <sys:String x:Key="LOCSpeakWhatWhere">Dire quoi / Où</sys:String>
+    <sys:String x:Key="LOCSpeakWhatWhere">Dire Quoi / Où</sys:String>
 
     <sys:String x:Key="LOCCmbItemNever">Jamais</sys:String>
     <sys:String x:Key="LOCCmbItemDesktop">Bureau</sys:String>
