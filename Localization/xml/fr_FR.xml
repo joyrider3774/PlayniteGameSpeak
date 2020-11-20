@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<resources>
+
+    <string name="LOC_GAMESPEAK_GameSelection">"Sélection de jeu:"</string>
+    <string name="LOC_GAMESPEAK_GameLaunching">"Lancement du jeu:"</string>
+    <string name="LOC_GAMESPEAK_GameInstalled">"Jeu installée :"</string>
+    <string name="LOC_GAMESPEAK_GameUnInstalled">"Jeu désinstallé:"</string>
+    <string name="LOC_GAMESPEAK_LibraryUpdated">"Librairie mise à jour :"</string>
+    <string name="LOC_GAMESPEAK_ApplicationStarted">"Application démarrée :"</string>
+    <string name="LOC_GAMESPEAK_ApplicationStopped">"Application arrêtée :"</string>
+    <string name="LOC_GAMESPEAK_SpeakWhatWhere">"Dire Quoi / Où"</string>
+
+    <string name="LOC_GAMESPEAK_CmbItemNever">"Jamais"</string>
+    <string name="LOC_GAMESPEAK_CmbItemDesktop">"Bureau"</string>
+    <string name="LOC_GAMESPEAK_CmbItemFullscreen">"Plein écran"</string>
+    <string name="LOC_GAMESPEAK_CmbItemDesktopFullscreen">"Bureau + Plein écran"</string>
+
+</resources>
