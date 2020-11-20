@@ -1,6 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="LOC_GAMESPEAK_GameSelection">"Mängu Valimine:"</string>
     <string name="LOC_GAMESPEAK_GameLaunching">"Mängu Käivitamine:"</string>
     <string name="LOC_GAMESPEAK_GameInstalled">"Mäng Installeeritud:"</string>
@@ -9,10 +8,8 @@
     <string name="LOC_GAMESPEAK_ApplicationStarted">"Rakendus Käivitatud:"</string>
     <string name="LOC_GAMESPEAK_ApplicationStopped">"Rakendus Peatatud:"</string>
     <string name="LOC_GAMESPEAK_SpeakWhatWhere">"Räägi Mida / Kus"</string>
-
     <string name="LOC_GAMESPEAK_CmbItemNever">"Mitte kunagi"</string>
     <string name="LOC_GAMESPEAK_CmbItemDesktop">"Töölaud"</string>
     <string name="LOC_GAMESPEAK_CmbItemFullscreen">"Täisekraan"</string>
     <string name="LOC_GAMESPEAK_CmbItemDesktopFullscreen">"Töölaud + Täisekraan"</string>
-
 </resources>
