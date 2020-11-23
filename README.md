@@ -17,7 +17,7 @@ It's possible to unlock an extra voice see here https://windowsreport.com/unlock
 [![Game Speak Example Video](http://img.youtube.com/vi/0IAgNGoCVLA/0.jpg)](http://www.youtube.com/watch?v=0IAgNGoCVLA "Game Speak Example Video")
 
 ## Translation
-The project is translateable on [Crowdin](https://crowdin.com/project/playnite-game-speak)
+The project is translatable on [Crowdin](https://crowdin.com/project/playnite-game-speak)
 
 ## Credits
 * Used Icon made by [Freepik](http://www.freepik.com/)
