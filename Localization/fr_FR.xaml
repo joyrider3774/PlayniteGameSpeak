@@ -2,10 +2,10 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 
-    <sys:String x:Key="LOC_GAMESPEAK_GameSelection">Sélection de jeu:</sys:String>
-    <sys:String x:Key="LOC_GAMESPEAK_GameLaunching">Lancement du jeu:</sys:String>
-    <sys:String x:Key="LOC_GAMESPEAK_GameInstalled">Jeu installée :</sys:String>
-    <sys:String x:Key="LOC_GAMESPEAK_GameUnInstalled">Jeu désinstallé:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameSelection">Sélection de jeu :</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameLaunching">Lancement du jeu :</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameInstalled">Jeu installé :</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameUnInstalled">Jeu désinstallé :</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_LibraryUpdated">Librairie mise à jour :</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_ApplicationStarted">Application démarrée :</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_ApplicationStopped">Application arrêtée :</sys:String>
