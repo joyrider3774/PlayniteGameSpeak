@@ -5,7 +5,7 @@ A Text to speech plugin for playnite, it can "speak out" the game names, game la
 Using the Settings -> Plugins -> Game Speak screen you can choose which texts to speak out and where (fullscreen, desktop, both or never).
 You can also specify what should be said. There is a special variable `[game]` you can put in certain events that support it, where it will be replaced by the related game's name.
 
-[![Settings](settings.png)]
+![Settings](settings.png)
 
 [Latest Release](https://github.com/joyrider3774/PlayniteGameSpeak/releases/latest)
 
