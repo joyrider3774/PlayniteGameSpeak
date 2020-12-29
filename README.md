@@ -7,6 +7,8 @@ You can also specify what should be said. There is a special variable `[game]` y
 
 [![Settings](settings.png)]
 
+[Latest Release](https://github.com/joyrider3774/PlayniteGameSpeak/releases/latest)
+
 ## Unlock extra voice
 It's possible to unlock an extra voice see here https://windowsreport.com/unlock-new-text-to-speech-voice-windows-10/
 
