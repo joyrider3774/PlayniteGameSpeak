@@ -22,6 +22,11 @@ It's possible to unlock an extra voice see here https://windowsreport.com/unlock
 ## Translation
 The project is translatable on [Crowdin](https://crowdin.com/project/playnite-game-speak)
 
+Thanks to the following people who have contributed with translations:
+* Spanish: Darklinpower
+* French: M0ylik
+* Polish: Renia
+
 ## Credits
 * Used Icon made by [Freepik](http://www.freepik.com/)
 * Original Localization file loader by [Lacro59](https://github.com/Lacro59)
