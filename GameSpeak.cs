@@ -133,7 +133,7 @@ namespace GameSpeak
         public override void OnLibraryUpdated(OnLibraryUpdatedEventArgs args)
         {
             // Add code to be executed when library is updated.
-            DoSpeak(Settings.Settings.SpeakLibraryUpdatedText, Settings.Settings.SpeakApplicationStopped, true);
+            DoSpeak(Settings.Settings.SpeakLibraryUpdatedText, Settings.Settings.SpeakLibraryUpdated, true);
         }
 
         public override ISettings GetSettings(bool firstRunSettings)
