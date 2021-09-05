@@ -9,25 +9,27 @@ using System.Reflection;
 
 namespace GameSpeak
 {
-    public class GameSpeak : Plugin
+    public class GameSpeak : GenericPlugin
     {
         private static readonly ILogger logger = LogManager.GetLogger();
 
         private readonly System.Speech.Synthesis.SpeechSynthesizer Speak;
-        
-        public GameSpeakSettingsView SettingsView;
 
-        private GameSpeakSettings Settings { get; set; }
+        private GameSpeakSettingsViewModel Settings { get; set; }
 
         public override Guid Id { get; } = Guid.Parse("9287cd5b-1397-4f57-9c76-9729ebca9b80");
         
         public static string pluginFolder;
-        
+
         public GameSpeak(IPlayniteAPI api) : base(api)
         {
             try
             {
-                Settings = new GameSpeakSettings(this);
+                Settings = new GameSpeakSettingsViewModel(this);
+                Properties = new GenericPluginProperties
+                {
+                    HasSettings = true
+                };
 
                 Speak = new System.Speech.Synthesis.SpeechSynthesizer();
 
@@ -69,53 +71,53 @@ namespace GameSpeak
             }
         }
 
-        public override void OnGameInstalled(Game game)
+        public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
             // Add code to be executed when game is finished installing.
-            DoSpeak(Settings.SpeakGameInstalledText.Replace("[game]", game.Name), Settings.SpeakGameInstalled, true);
+            DoSpeak(Settings.Settings.SpeakGameInstalledText.Replace("[game]", args.Game.Name), Settings.Settings.SpeakGameInstalled, true);
         }
 
-        public override void OnGameSelected(GameSelectionEventArgs args)
+        public override void OnGameSelected(OnGameSelectedEventArgs args)
         {
             if (args.NewValue.Count == 1) {
-                DoSpeak(Settings.SpeakGameSelectedText.Replace("[game]", args.NewValue[0].Name), Settings.SpeakGameSelected, true);  
+                DoSpeak(Settings.Settings.SpeakGameSelectedText.Replace("[game]", args.NewValue[0].Name), Settings.Settings.SpeakGameSelected, true);  
             }
         }
 
-        public override void OnGameStarted(Game game)
+        public override void OnGameStarted(OnGameStartedEventArgs args)
         {
             // Add code to be executed when game is started running.
             //needs to be sync or it won't speak out full text
         }
 
-        public override void OnGameStarting(Game game)
+        public override void OnGameStarting(OnGameStartingEventArgs args)
         {
             // Add code to be executed when game is preparing to be started.
-            DoSpeak(Settings.SpeakGameLaunchingText.Replace("[game]", game.Name), Settings.SpeakGameLaunching, true);
+            DoSpeak(Settings.Settings.SpeakGameLaunchingText.Replace("[game]", args.Game.Name), Settings.Settings.SpeakGameLaunching, true);
         }
 
-        public override void OnGameStopped(Game game, long elapsedSeconds)
+        public override void OnGameStopped(OnGameStoppedEventArgs args)
         {
             // Add code to be executed when game is preparing to be started.
         }
 
-        public override void OnGameUninstalled(Game game)
+        public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
         {
             // Add code to be executed when game is uninstalled.
-            DoSpeak(Settings.SpeakGameUnInstalledText.Replace("[game]", game.Name), Settings.SpeakGameUnInstalled, true);
+            DoSpeak(Settings.Settings.SpeakGameUnInstalledText.Replace("[game]", args.Game.Name), Settings.Settings.SpeakGameUnInstalled, true);
         }
 
-        public override void OnApplicationStarted()
+        public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
             // Add code to be executed when Playnite is initialized.
-            DoSpeak(Settings.SpeakApplicationStartedText, Settings.SpeakApplicationStarted, true);
+            DoSpeak(Settings.Settings.SpeakApplicationStartedText, Settings.Settings.SpeakApplicationStarted, true);
         }
 
-        public override void OnApplicationStopped()
+        public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
         {
             // Add code to be executed when Playnite is shutting down.
             //needs to be sync or won't speak out full text before quiting            
-            DoSpeak(Settings.SpeakApplicationStoppedText, Settings.SpeakApplicationStopped, false);
+            DoSpeak(Settings.Settings.SpeakApplicationStoppedText, Settings.Settings.SpeakApplicationStopped, false);
             try
             {
                 Speak.SpeakAsyncCancelAll();
@@ -128,10 +130,10 @@ namespace GameSpeak
             }
         }
 
-        public override void OnLibraryUpdated()
+        public override void OnLibraryUpdated(OnLibraryUpdatedEventArgs args)
         {
             // Add code to be executed when library is updated.
-            DoSpeak(Settings.SpeakLibraryUpdatedText, Settings.SpeakApplicationStopped, true);
+            DoSpeak(Settings.Settings.SpeakLibraryUpdatedText, Settings.Settings.SpeakApplicationStopped, true);
         }
 
         public override ISettings GetSettings(bool firstRunSettings)
@@ -141,8 +143,7 @@ namespace GameSpeak
 
         public override UserControl GetSettingsView(bool firstRunSettings)
         {
-            SettingsView = new GameSpeakSettingsView();
-            return SettingsView;
+            return new GameSpeakSettingsView();
         }
     }
 }

@@ -2,7 +2,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 
-    <sys:String x:Key="LOC_GAMESPEAK_GameSelection">Game Selection:</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_GameSelection">Silahkan Pilih Game:</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_GameLaunching">Game Launching:</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_GameInstalled">Game Installed:</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_GameUnInstalled">Game Uninstalled:</sys:String>

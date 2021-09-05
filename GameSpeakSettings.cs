@@ -1,15 +1,12 @@
 ﻿using Playnite.SDK;
+using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
 
 namespace GameSpeak
 {
-    public class GameSpeakSettings : ISettings
+    public class GameSpeakSettings
     {
-        private static readonly ILogger logger = LogManager.GetLogger();
-        private readonly GameSpeak plugin;
-        private GameSpeakSettings EditDataSettings;
-
         public int SpeakGameSelected { get; set; } = 3;
         public int SpeakGameLaunching { get; set; } = 3;
         public int SpeakGameInstalled { get; set; } = 3;
@@ -25,14 +22,26 @@ namespace GameSpeak
         public string SpeakApplicationStoppedText { get; set; } = "Goodbye";
         public string SpeakApplicationStartedText { get; set; } = "Welcome to Playnite";
         public string SpeakLibraryUpdatedText { get; set; } = "Library updated";
+    }
 
+    public class GameSpeakSettingsViewModel : ObservableObject, ISettings
+    {
+        private static readonly ILogger logger = LogManager.GetLogger();
+        private readonly GameSpeak plugin;
+        private GameSpeakSettings editingClone { get; set; }
 
-        // Parameterless constructor must exist if you want to use LoadPluginSettings method.
-        public GameSpeakSettings()
+        private GameSpeakSettings settings;
+        public GameSpeakSettings Settings
         {
+            get => settings;
+            set
+            {
+                settings = value;
+                OnPropertyChanged();
+            }
         }
 
-        public GameSpeakSettings(GameSpeak plugin)
+        public GameSpeakSettingsViewModel(GameSpeak plugin)
         {
             try
             {                
@@ -45,7 +54,11 @@ namespace GameSpeak
                 // LoadPluginSettings returns null if not saved data is available.
                 if (savedSettings != null)
                 {
-                    RestoreSettings(savedSettings);
+                    Settings = savedSettings;
+                }
+                else
+                {
+                    Settings = new GameSpeakSettings();
                 }
             }
             catch (Exception E)
@@ -59,8 +72,8 @@ namespace GameSpeak
         {
             // Code executed when settings view is opened and user starts editing values.
             try
-            {               
-                EditDataSettings = new GameSpeakSettings(plugin);
+            {
+                editingClone = Serialization.GetClone(Settings);
             }
             catch (Exception E)
             {
@@ -73,7 +86,7 @@ namespace GameSpeak
         {
             // Code executed when user decides to cancel any changes made since BeginEdit was called.
             // This method should revert any changes made to Option1 and Option2.
-            RestoreSettings(EditDataSettings);
+            Settings = editingClone;
         }
 
         public void EndEdit()
@@ -81,7 +94,7 @@ namespace GameSpeak
             // Code executed when user decides to confirm changes made since BeginEdit was called.
             try
             {
-                plugin.SavePluginSettings(this);
+                plugin.SavePluginSettings(Settings);
             }
             catch (Exception E)
             {
@@ -97,35 +110,6 @@ namespace GameSpeak
             // List of errors is presented to user if verification fails.
             errors = new List<string>();
             return true;
-        }
-
-
-        private void RestoreSettings(GameSpeakSettings source)
-        {
-            try
-            {
-                SpeakGameInstalled = source.SpeakGameInstalled;
-                SpeakGameLaunching = source.SpeakGameLaunching;
-                SpeakGameSelected = source.SpeakGameSelected;
-                SpeakGameUnInstalled = source.SpeakGameUnInstalled;
-                SpeakApplicationStopped = source.SpeakApplicationStopped;
-                SpeakApplicationStarted = source.SpeakApplicationStarted;
-                SpeakLibraryUpdated = source.SpeakLibraryUpdated;
-
-
-                SpeakGameSelectedText = source.SpeakGameSelectedText;
-                SpeakGameLaunchingText = source.SpeakGameLaunchingText;
-                SpeakGameInstalledText = source.SpeakGameInstalledText;
-                SpeakGameUnInstalledText = source.SpeakGameUnInstalledText;
-                SpeakApplicationStoppedText = source.SpeakApplicationStoppedText;
-                SpeakApplicationStartedText = source.SpeakApplicationStartedText;
-                SpeakLibraryUpdatedText = source.SpeakLibraryUpdatedText;
-            }
-            catch (Exception E)
-            {
-                logger.Error(E, "RestoreSettings()");
-                plugin.PlayniteApi.Dialogs.ShowErrorMessage(E.ToString(), Constants.AppName);
-            }
         }
     }
 }

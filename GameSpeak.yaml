@@ -1,0 +1,9 @@
+AddonId: 'GameSpeak_9287cd5b-1397-4f57-9c76-9729ebca9b80'
+Packages:
+  - Version: 3.0
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2021-09-05
+    PackageUrl: https://github.com/joyrider3774/PlayniteGameSpeak/releases/download/v3.0/GameSpeak_9287cd5b-1397-4f57-9c76-9729ebca9b80_3_0.pext
+    Changelog:
+      - Updated Version for Playnite 9
+      - Updated Language Translations
