@@ -13,7 +13,7 @@
 
     <sys:String x:Key="LOC_GAMESPEAK_CmbItemNever">Never</sys:String>
     <sys:String x:Key="LOC_GAMESPEAK_CmbItemDesktop">Desktop</sys:String>
-    <sys:String x:Key="LOC_GAMESPEAK_CmbItemFullscreen">Fullscreen</sys:String>
-    <sys:String x:Key="LOC_GAMESPEAK_CmbItemDesktopFullscreen">Desktop + Fullscreen</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemFullscreen">ملء الشاشة</sys:String>
+    <sys:String x:Key="LOC_GAMESPEAK_CmbItemDesktopFullscreen">سطح المكتب + ملء الشاشة</sys:String>
 
 </ResourceDictionary>
