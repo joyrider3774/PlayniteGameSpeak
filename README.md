@@ -3,6 +3,11 @@ A Text to speech plugin for playnite, it can "speak out" the game names, game la
 
 [Latest Release](https://github.com/joyrider3774/PlayniteGameSpeak/releases/latest)
 
+## Buy me a "koffie" if you feel like supporting 
+I do everything in my spare time for free, if you feel something aided you and you want to support me, you can always buy me a "koffie" as we say in dutch, no obligations whatsoever...
+
+<a href='https://ko-fi.com/Q5Q3BKI5S' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 ## Settings
 Using the Settings -> Plugins -> Game Speak screen you can choose which texts to speak out and where (fullscreen, desktop, both or never).
 You can also specify what should be said. There is a special variable `[game]` you can put in certain events that support it, where it will be replaced by the related game's name.
@@ -28,6 +33,3 @@ Darklinpower, M0ylik, Renia, yngams, voi__Wood, Akmal Ludin, atemporal_
 ## Credits
 * Used Icon made by [Freepik](http://www.freepik.com/)
 * Original Localization file loader by [Lacro59](https://github.com/Lacro59)
-
-## Donations
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/joyrider3774)
