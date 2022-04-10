@@ -1,4 +1,6 @@
 # Playnite Game Speak
+![DownloadCountTotal](https://img.shields.io/github/downloads/joyrider3774/PlayniteGameSpeak/total?label=total%20downloads&style=plastic) ![DownloadCountLatest](https://img.shields.io/github/downloads/joyrider3774/PlayniteGameSpeak/latest/total?style=plastic) ![LatestVersion](https://img.shields.io/github/v/tag/joyrider3774/PlayniteGameSpeak?label=Latest%20version&style=plastic) ![License](https://img.shields.io/github/license/joyrider3774/PlayniteGameSpeak?style=plastic)
+
 A Text to speech plugin for playnite, it can "speak out" the game names, game launching, game installed and game uninstalled, ... texts using speech api.
 
 [Latest Release](https://github.com/joyrider3774/PlayniteGameSpeak/releases/latest)
